@@ -1,10 +1,8 @@
 package lk.ijse.gdse66.spring.api;
 
 import lk.ijse.gdse66.spring.dto.CustomerDTO;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +16,25 @@ public class CustomerController {
     }
 
     @GetMapping(path = "/getAll")
-    public List<CustomerDTO>getAllCustomer(){
+    public List<CustomerDTO>getAllCustomers(){
         ArrayList<CustomerDTO> customers = new ArrayList<CustomerDTO>();
         return customers;
     }
+    @GetMapping(path = "/search/{id}")
+    public String getCustomer(@PathVariable("id") String id){
+        return id;
+    }
+    @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public CustomerDTO saveCustomer(@ModelAttribute CustomerDTO dto){
+        return dto;
+    }
+    @PutMapping
+    public CustomerDTO updateCustomer(@RequestBody CustomerDTO dto){
+        return dto;
+    }
+    @DeleteMapping(path = "/delete/{id}")
+    public String deleteCustomer(@PathVariable String id){
+        return id;
+    }
+
 }
