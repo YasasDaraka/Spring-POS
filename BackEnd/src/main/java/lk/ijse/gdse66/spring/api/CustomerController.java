@@ -33,7 +33,7 @@ public class CustomerController {
         return dto;
     }
     @DeleteMapping(path = "/delete/{id}")
-    public String deleteCustomer(@PathVariable String id){
+    public String deleteCustomer(@PathVariable("id") String id){
         return id;
     }
 
