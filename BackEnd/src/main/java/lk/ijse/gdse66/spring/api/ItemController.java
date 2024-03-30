@@ -1,7 +1,7 @@
 package lk.ijse.gdse66.spring.api;
 
-import lk.ijse.gdse66.spring.dto.CustomerDTO;
-import lk.ijse.gdse66.spring.service.CustomerService;
+import lk.ijse.gdse66.spring.dto.ItemDTO;
+import lk.ijse.gdse66.spring.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,33 +18,33 @@ public class ItemController {
         System.out.println("ItemController");
     }
     @Autowired
-    CustomerService cusService;
+    ItemService itemService;
     @GetMapping(path = "/getAll")
-    public List<CustomerDTO> getAllCustomers(){
-        return cusService.getAllCustomer();
+    public List<ItemDTO> getAllItems(){
+        return itemService.getAllItem();
     }
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/search/{id}")
-    public CustomerDTO getCustomer(@PathVariable("id") String id){
-        return cusService.searchCustomer(id);
+    public ItemDTO getItem(@PathVariable("id") String id){
+        return itemService.searchItem(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity<Void> saveCustomer(@ModelAttribute CustomerDTO dto){
-        cusService.saveCustomer(dto);
+    public ResponseEntity<Void> saveItem(@ModelAttribute ItemDTO dto){
+        itemService.saveItem(dto);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateCustomer(@RequestBody CustomerDTO dto){
-        cusService.updateCustomer(dto);
+    public ResponseEntity<Void> updateItem(@RequestBody ItemDTO dto){
+        itemService.updateItem(dto);
         return ResponseEntity.ok().build();
     }
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(params = "cusId")
-    public ResponseEntity<Void> deleteCustomer(@RequestParam("cusId") String cusId){
-        cusService.deleteCustomer(cusId);
+    public ResponseEntity<Void> deleteItem(@RequestParam("cusId") String cusId){
+        itemService.deleteItem(cusId);
         return ResponseEntity.ok().build();
     }
 }
