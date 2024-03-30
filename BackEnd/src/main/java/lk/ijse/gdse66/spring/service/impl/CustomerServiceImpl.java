@@ -1,7 +1,6 @@
 package lk.ijse.gdse66.spring.service.impl;
 
 import lk.ijse.gdse66.spring.dto.CustomerDTO;
-import lk.ijse.gdse66.spring.entity.Customer;
 import lk.ijse.gdse66.spring.repository.CustomerRepo;
 import lk.ijse.gdse66.spring.service.CustomerService;
 import lk.ijse.gdse66.spring.service.util.Tranformer;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
