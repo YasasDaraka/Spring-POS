@@ -1,6 +1,5 @@
 package lk.ijse.gdse66.spring.service.impl;
 
-import lk.ijse.gdse66.spring.dto.CustomerDTO;
 import lk.ijse.gdse66.spring.dto.ItemDTO;
 import lk.ijse.gdse66.spring.repository.ItemRepo;
 import lk.ijse.gdse66.spring.service.ItemService;

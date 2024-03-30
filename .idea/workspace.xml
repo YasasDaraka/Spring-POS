@@ -10,7 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="11e5276a-d8b5-45b2-9024-f2d6b2f9c1cd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BackEnd_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/BackEnd_war_exploded.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/service/impl/ItemServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/service/impl/ItemServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0.war" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0/WEB-INF/classes/lk/ijse/gdse66/spring/service/impl/ItemServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0/WEB-INF/classes/lk/ijse/gdse66/spring/service/impl/ItemServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/lk/ijse/gdse66/spring/service/impl/ItemServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/lk/ijse/gdse66/spring/service/impl/ItemServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/controller/itemController.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/controller/itemController.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,19 +73,6 @@
     <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Tomcat 10.1.17" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.17" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER" value="false" />
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -180,7 +173,8 @@
       <workItem from="1711708133061" duration="2167000" />
       <workItem from="1711727637195" duration="4467000" />
       <workItem from="1711789242024" duration="14344000" />
-      <workItem from="1711812208817" duration="2173000" />
+      <workItem from="1711812208817" duration="3009000" />
+      <workItem from="1711815266887" duration="359000" />
     </task>
     <servers />
   </component>

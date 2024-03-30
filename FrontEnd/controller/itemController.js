@@ -62,7 +62,7 @@ function loadItemAr(){
     return new Promise(function (resolve, reject) {
         var ar;
         $.ajax({
-            url: "http://localhost:8080/BackEnd/item?info=getall",
+            url: "http://localhost:8080/BackEnd/item/getAll",
             method: "GET",
             success: function (res) {
                 console.log(res);
