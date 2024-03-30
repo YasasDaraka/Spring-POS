@@ -38,7 +38,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void updateItem(ItemDTO dto) {
-
+        itemRepo.findById(dto.getItmCode()).ifPresentOrElse(
+                item -> itemRepo.save(tranformer.convert(dto, Tranformer.ClassType.ITEM_ENTITY)),
+                () -> {throw new RuntimeException("Item Not Exist");});
     }
 
     @Override
