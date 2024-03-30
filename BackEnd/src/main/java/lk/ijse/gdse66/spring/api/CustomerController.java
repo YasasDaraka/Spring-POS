@@ -1,11 +1,12 @@
 package lk.ijse.gdse66.spring.api;
 
 import lk.ijse.gdse66.spring.dto.CustomerDTO;
+import lk.ijse.gdse66.spring.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,11 +16,11 @@ public class CustomerController {
     public CustomerController() {
         System.out.println("CustomerController");
     }
-
+    @Autowired
+    CustomerService CusService;
     @GetMapping(path = "/getAll")
     public List<CustomerDTO>getAllCustomers(){
-        ArrayList<CustomerDTO> customers = new ArrayList<CustomerDTO>();
-        return customers;
+        return CusService.getAllCustomer();
     }
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/search/{id}")
