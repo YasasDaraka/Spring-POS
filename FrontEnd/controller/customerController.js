@@ -62,7 +62,7 @@ function loadCusAr(){
     return new Promise(function (resolve, reject) {
         var ar;
         $.ajax({
-            url: "http://localhost:8080/BackEnd/customer?info=getall",
+            url: "http://localhost:8080/BackEnd/customer/getAll",
             method: "GET",
             success: function (res) {
                 console.log(res);
@@ -191,16 +191,17 @@ function saveCustomer() {
         console.log(isValid)
         if (!isValid) {
         console.log(isValid)
-        var array = $("#CusForm").serializeArray();
+        /*var array = $("#CusForm").serializeArray();
         var data = {};
         array.forEach(function (field) {
             data[field.name] = field.value;
-        });
+        });*/
+        var data = $("#CusForm").serialize();
         $.ajax({
             url:"http://localhost:8080/BackEnd/customer",
             method: "POST",
-            data:JSON.stringify(data),
-            contentType:"application/json",
+            data:data,
+            contentType:"application/x-www-form-urlencoded",
             success:function (res,textStatus,jsXH) {
                 console.log(res);
                 alert("Customer Added Successfully");
@@ -221,7 +222,7 @@ function getAllCustomers() {
 
     $("#customerTable").empty();
     $.ajax({
-        url:"http://localhost:8080/BackEnd/customer?info=getall",
+        url:"http://localhost:8080/BackEnd/customer/getAll",
         method: "GET",
         success:function (res) {
             console.log(res);
@@ -253,7 +254,7 @@ function getAllCustomers() {
 function validCustomer(id) {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: "http://localhost:8080/BackEnd/customer?cusId=" + id + "&info=search",
+            url: "http://localhost:8080/BackEnd/customer/search/"+id,
             method: "GET",
             dataType: "json",
             success: function (res, textStatus, xhr) {
@@ -274,7 +275,7 @@ function searchCustomer(id) {
     console.log(id);
     return new Promise(function (resolve, reject) {
     $.ajax({
-        url:"http://localhost:8080/BackEnd/customer?cusId="+id+"&info=search",
+        url:"http://localhost:8080/BackEnd/customer/search/"+id,
         method: "GET",
         dataType:"json",
         success:function (res) {

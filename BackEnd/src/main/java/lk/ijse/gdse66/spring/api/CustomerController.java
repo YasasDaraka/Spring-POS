@@ -1,6 +1,7 @@
 package lk.ijse.gdse66.spring.api;
 
 import lk.ijse.gdse66.spring.dto.CustomerDTO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,21 +21,26 @@ public class CustomerController {
         ArrayList<CustomerDTO> customers = new ArrayList<CustomerDTO>();
         return customers;
     }
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/search/{id}")
     public String getCustomer(@PathVariable("id") String id){
         return id;
     }
+
     @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public CustomerDTO saveCustomer(@ModelAttribute CustomerDTO dto){
         return dto;
     }
+
     @PutMapping
     public CustomerDTO updateCustomer(@RequestBody CustomerDTO dto){
         return dto;
     }
-    @DeleteMapping(path = "/delete/{id}")
-    public String deleteCustomer(@PathVariable("id") String id){
-        return id;
+
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping(params = "cusId")
+    public String deleteCustomer(@PathVariable("cusId") String cusId){
+        return cusId;
     }
 
 }
