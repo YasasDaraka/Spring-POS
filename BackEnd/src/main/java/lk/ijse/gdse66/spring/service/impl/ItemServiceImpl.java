@@ -45,6 +45,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void deleteItem(String id) {
-
+        itemRepo.findById(id).ifPresentOrElse(
+                item -> itemRepo.deleteById(id),
+                ()-> {throw new RuntimeException("Item Not Exist");}
+        );
     }
 }
