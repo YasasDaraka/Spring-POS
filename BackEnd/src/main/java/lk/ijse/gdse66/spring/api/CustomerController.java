@@ -5,6 +5,7 @@ import lk.ijse.gdse66.spring.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,20 +18,21 @@ public class CustomerController {
         System.out.println("CustomerController");
     }
     @Autowired
-    CustomerService CusService;
+    CustomerService cusService;
     @GetMapping(path = "/getAll")
     public List<CustomerDTO>getAllCustomers(){
-        return CusService.getAllCustomer();
+        return cusService.getAllCustomer();
     }
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/search/{id}")
-    public String getCustomer(@PathVariable("id") String id){
-        return id;
+    public CustomerDTO getCustomer(@PathVariable("id") String id){
+        return cusService.searchCustomer(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public CustomerDTO saveCustomer(@ModelAttribute CustomerDTO dto){
-        return dto;
+    public ResponseEntity<Void> saveCustomer(@ModelAttribute CustomerDTO dto){
+        cusService.saveCustomer(dto);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping
