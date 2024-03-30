@@ -196,16 +196,17 @@ function saveItem() {
         console.log(isValid)
         if (!isValid) {
             console.log(isValid)
-            var array = $("#itmForm").serializeArray();
+            /*var array = $("#itmForm").serializeArray();
             var data = {};
             array.forEach(function (field) {
                 data[field.name] = field.value;
-            });
+            });*/
+            var data = $("#itmForm").serialize();
             $.ajax({
                 url:"http://localhost:8080/BackEnd/item",
                 method: "POST",
-                data:JSON.stringify(data),
-                contentType:"application/json",
+                data:data,
+                contentType:"application/x-www-form-urlencoded",
                 success:function (res,textStatus,jsXH) {
                     console.log(res);
                     alert("Item Added Successfully");
@@ -225,7 +226,7 @@ function saveItem() {
 function getAllItem() {
     $("#itemTable").empty();
     $.ajax({
-        url:"http://localhost:8080/BackEnd/item?info=getall",
+        url:"http://localhost:8080/BackEnd/item/getAll",
         method: "GET",
         success:function (res) {
             console.log(res);
@@ -259,7 +260,7 @@ function getAllItem() {
 function validItem(id) {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: "http://localhost:8080/BackEnd/item?itmCode=" + id + "&info=search",
+            url: "http://localhost:8080/BackEnd/item/search/"+id,
             method: "GET",
             dataType: "json",
             success: function (res, textStatus, xhr) {
@@ -280,7 +281,7 @@ function searchItem(id) {
     console.log(id);
     return new Promise(function (resolve, reject) {
     $.ajax({
-        url:"http://localhost:8080/BackEnd/item?itmCode="+id+"&info=search",
+        url:"http://localhost:8080/BackEnd/item/search/"+id,
         method: "GET",
         dataType:"json",
         success:function (res) {

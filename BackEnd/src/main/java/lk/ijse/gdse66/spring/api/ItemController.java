@@ -24,9 +24,9 @@ public class ItemController {
         return itemService.getAllItem();
     }
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(path = "/search/{id}")
-    public ItemDTO getItem(@PathVariable("id") String id){
-        return itemService.searchItem(id);
+    @GetMapping(path = "/search/{itmCode}")
+    public ItemDTO getItem(@PathVariable("itmCode") String itmCode){
+        return itemService.searchItem(itmCode);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -42,9 +42,9 @@ public class ItemController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping(params = "cusId")
-    public ResponseEntity<Void> deleteItem(@RequestParam("cusId") String cusId){
-        itemService.deleteItem(cusId);
+    @DeleteMapping(params = "itmCode")
+    public ResponseEntity<Void> deleteItem(@RequestParam("itmCode") String itmCode){
+        itemService.deleteItem(itmCode);
         return ResponseEntity.ok().build();
     }
 }
