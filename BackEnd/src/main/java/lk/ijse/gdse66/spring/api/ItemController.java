@@ -19,10 +19,13 @@ public class ItemController {
     }
     @Autowired
     ItemService itemService;
+
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/getAll")
     public List<ItemDTO> getAllItems(){
         return itemService.getAllItem();
     }
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/search/{itmCode}")
     public ItemDTO getItem(@PathVariable("itmCode") String itmCode){
@@ -30,6 +33,7 @@ public class ItemController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> saveItem(@ModelAttribute ItemDTO dto){
         itemService.saveItem(dto);
         return ResponseEntity.ok().build();
@@ -38,13 +42,12 @@ public class ItemController {
     @PutMapping
     public ResponseEntity<Void> updateItem(@RequestBody ItemDTO dto){
         itemService.updateItem(dto);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
-    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(params = "itmCode")
     public ResponseEntity<Void> deleteItem(@RequestParam("itmCode") String itmCode){
         itemService.deleteItem(itmCode);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }

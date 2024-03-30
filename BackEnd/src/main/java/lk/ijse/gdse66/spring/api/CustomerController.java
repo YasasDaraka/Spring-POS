@@ -1,5 +1,6 @@
 package lk.ijse.gdse66.spring.api;
 
+import jakarta.validation.Valid;
 import lk.ijse.gdse66.spring.dto.CustomerDTO;
 import lk.ijse.gdse66.spring.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,33 +20,36 @@ public class CustomerController {
     }
     @Autowired
     CustomerService cusService;
+
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/getAll")
     public List<CustomerDTO>getAllCustomers(){
         return cusService.getAllCustomer();
     }
+
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(path = "/search/{id}")
+    @GetMapping(path = "/search/{id:C00-(0*[1-9]\\d{0,2})}")
     public CustomerDTO getCustomer(@PathVariable("id") String id){
         return cusService.searchCustomer(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity<Void> saveCustomer(@ModelAttribute CustomerDTO dto){
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Void> saveCustomer(@Valid @ModelAttribute CustomerDTO dto){
         cusService.saveCustomer(dto);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateCustomer(@RequestBody CustomerDTO dto){
+    public ResponseEntity<Void> updateCustomer(@Valid @RequestBody CustomerDTO dto){
         cusService.updateCustomer(dto);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
-    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(params = "cusId")
     public ResponseEntity<Void> deleteCustomer(@RequestParam("cusId") String cusId){
         cusService.deleteCustomer(cusId);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
 }
