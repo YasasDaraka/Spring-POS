@@ -28,7 +28,7 @@ public class CustomerController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(path = "/search/{id:C00-(0*[1-9]\\d{0,2})}")
+    @GetMapping(path = "/search/{id:C00-0*[1-9]\\d{0,2}}")
     public CustomerDTO getCustomer(@PathVariable("id") String id){
         return cusService.searchCustomer(id);
     }
