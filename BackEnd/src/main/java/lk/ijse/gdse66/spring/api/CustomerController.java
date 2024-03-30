@@ -43,8 +43,9 @@ public class CustomerController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(params = "cusId")
-    public String deleteCustomer(@PathVariable("cusId") String cusId){
-        return cusId;
+    public ResponseEntity<Void> deleteCustomer(@RequestParam("cusId") String cusId){
+        cusService.deleteCustomer(cusId);
+        return ResponseEntity.ok().build();
     }
 
 }
