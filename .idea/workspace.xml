@@ -11,12 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="11e5276a-d8b5-45b2-9024-f2d6b2f9c1cd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/api/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/api/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/service/impl/CustomerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/service/impl/CustomerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/api/ItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/api/ItemController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0.war" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0/WEB-INF/classes/lk/ijse/gdse66/spring/api/CustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0/WEB-INF/classes/lk/ijse/gdse66/spring/api/CustomerController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0/WEB-INF/classes/lk/ijse/gdse66/spring/service/impl/CustomerServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0/WEB-INF/classes/lk/ijse/gdse66/spring/service/impl/CustomerServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/lk/ijse/gdse66/spring/api/CustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/lk/ijse/gdse66/spring/api/CustomerController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/lk/ijse/gdse66/spring/service/impl/CustomerServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/lk/ijse/gdse66/spring/service/impl/CustomerServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,13 +71,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -184,7 +183,8 @@
       <updated>1711708131201</updated>
       <workItem from="1711708133061" duration="2167000" />
       <workItem from="1711727637195" duration="4467000" />
-      <workItem from="1711789242024" duration="13930000" />
+      <workItem from="1711789242024" duration="14344000" />
+      <workItem from="1711812208817" duration="296000" />
     </task>
     <servers />
   </component>
