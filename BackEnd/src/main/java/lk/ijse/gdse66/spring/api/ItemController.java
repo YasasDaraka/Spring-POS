@@ -1,5 +1,6 @@
 package lk.ijse.gdse66.spring.api;
 
+import jakarta.validation.Valid;
 import lk.ijse.gdse66.spring.dto.ItemDTO;
 import lk.ijse.gdse66.spring.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class ItemController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateItem(@RequestBody ItemDTO dto){
+    public ResponseEntity<Void> updateItem(@Valid @RequestBody ItemDTO dto){
         itemService.updateItem(dto);
         return ResponseEntity.noContent().build();
     }
