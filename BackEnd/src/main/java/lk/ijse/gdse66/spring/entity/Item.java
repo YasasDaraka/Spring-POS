@@ -1,11 +1,13 @@
 package lk.ijse.gdse66.spring.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -18,4 +20,7 @@ public class Item {
     private String itmName;
     private double itmPrice;
     private int itmQTY;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "item")
+    private List<OrderDetails> orderDetails = new ArrayList<>();
+
 }

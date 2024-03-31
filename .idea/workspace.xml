@@ -11,8 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="11e5276a-d8b5-45b2-9024-f2d6b2f9c1cd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/config/JPAConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/config/JPAConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/config/WebRootConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/config/WebRootConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/entity/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/entity/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/entity/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/entity/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0.war" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0.war" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,12 +62,20 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="17" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/entity" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Spring Project\BackEnd\src\main\java\lk\ijse\gdse66\spring\entity" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="lk.ijse.gdse66.spring.entity" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
@@ -184,7 +193,7 @@
       <workItem from="1711789242024" duration="14344000" />
       <workItem from="1711812208817" duration="3009000" />
       <workItem from="1711815266887" duration="5818000" />
-      <workItem from="1711856396334" duration="9756000" />
+      <workItem from="1711856396334" duration="13711000" />
     </task>
     <servers />
   </component>
