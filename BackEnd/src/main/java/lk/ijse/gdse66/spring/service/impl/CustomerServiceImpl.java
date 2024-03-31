@@ -3,6 +3,7 @@ package lk.ijse.gdse66.spring.service.impl;
 import lk.ijse.gdse66.spring.dto.CustomerDTO;
 import lk.ijse.gdse66.spring.repository.CustomerRepo;
 import lk.ijse.gdse66.spring.service.CustomerService;
+import lk.ijse.gdse66.spring.service.exception.DuplicateRecordException;
 import lk.ijse.gdse66.spring.service.exception.NotFoundException;
 import lk.ijse.gdse66.spring.service.util.Tranformer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,13 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDTO searchCustomer(String id) {
         return (CustomerDTO) customerRepo.findById(id)
                 .map(cus -> tranformer.convert(cus, Tranformer.ClassType.CUS_DTO))
-                .orElseThrow(() -> new RuntimeException("Customer Not Exist"));
+                .orElseThrow(() -> new NotFoundException("Customer Not Exist"));
     }
 
     @Override
     public void saveCustomer(CustomerDTO dto) {
         customerRepo.findById(dto.getId()).ifPresentOrElse(
-                customer -> { throw new RuntimeException("Customer Already Exist"); },
+                customer -> { throw new DuplicateRecordException("Customer Already Exist"); },
                 () -> customerRepo.save(tranformer.convert(dto, Tranformer.ClassType.CUS_ENTITY)));
     }
 
@@ -41,7 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
     public void updateCustomer(CustomerDTO dto) {
         customerRepo.findById(dto.getId()).ifPresentOrElse(
                 customer -> customerRepo.save(tranformer.convert(dto, Tranformer.ClassType.CUS_ENTITY)),
-                () -> {throw new RuntimeException("Customer Not Exist");});
+                () -> {throw new NotFoundException("Customer Not Exist");});
     }
 
     @Override

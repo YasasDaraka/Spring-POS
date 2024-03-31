@@ -3,6 +3,8 @@ package lk.ijse.gdse66.spring.service.impl;
 import lk.ijse.gdse66.spring.dto.ItemDTO;
 import lk.ijse.gdse66.spring.repository.ItemRepo;
 import lk.ijse.gdse66.spring.service.ItemService;
+import lk.ijse.gdse66.spring.service.exception.DuplicateRecordException;
+import lk.ijse.gdse66.spring.service.exception.NotFoundException;
 import lk.ijse.gdse66.spring.service.util.Tranformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,13 +27,13 @@ public class ItemServiceImpl implements ItemService {
     public ItemDTO searchItem(String id) {
         return (ItemDTO) itemRepo.findById(id)
                 .map(itm -> tranformer.convert(itm, Tranformer.ClassType.ITEM_DTO))
-                .orElseThrow(() -> new RuntimeException("Item Not Exist"));
+                .orElseThrow(() -> new NotFoundException("Item Not Exist"));
     }
 
     @Override
     public void saveItem(ItemDTO dto) {
         itemRepo.findById(dto.getItmCode()).ifPresentOrElse(
-                item -> { throw new RuntimeException("Item Already Exist"); },
+                item -> { throw new DuplicateRecordException("Item Already Exist"); },
                 () -> itemRepo.save(tranformer.convert(dto, Tranformer.ClassType.ITEM_ENTITY)));
     }
 
@@ -39,14 +41,14 @@ public class ItemServiceImpl implements ItemService {
     public void updateItem(ItemDTO dto) {
         itemRepo.findById(dto.getItmCode()).ifPresentOrElse(
                 item -> itemRepo.save(tranformer.convert(dto, Tranformer.ClassType.ITEM_ENTITY)),
-                () -> {throw new RuntimeException("Item Not Exist");});
+                () -> {throw new NotFoundException("Item Not Exist");});
     }
 
     @Override
     public void deleteItem(String id) {
         itemRepo.findById(id).ifPresentOrElse(
                 item -> itemRepo.deleteById(id),
-                ()-> {throw new RuntimeException("Item Not Exist");}
+                ()-> {throw new NotFoundException("Item Not Exist");}
         );
     }
 }

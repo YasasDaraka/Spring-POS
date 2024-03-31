@@ -1,5 +1,6 @@
 package lk.ijse.gdse66.spring.adviser;
 
+import lk.ijse.gdse66.spring.service.exception.DuplicateRecordException;
 import lk.ijse.gdse66.spring.service.exception.NotFoundException;
 import lk.ijse.gdse66.spring.service.exception.ServiceException;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,8 @@ public class GlobalExceptionHandler {
         HttpStatus status;
         if (exp instanceof NotFoundException) {
             status = HttpStatus.NOT_FOUND;
+        }else if (exp instanceof DuplicateRecordException) {
+            status = HttpStatus.CONFLICT;
         } else {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
