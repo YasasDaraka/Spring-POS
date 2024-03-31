@@ -54,6 +54,9 @@ public class Tranformer {
         if (getType(to) instanceof Order) {
             return (R) toOrderEntity((OrderDTO) from);
         }
+        if (to.equals(ClassType.ORDER_DTO_LIST)){
+            return (R) toOrderDTOList((List<Order>) from);
+        }
         return (R) mapper.map(from, getType(to));
 
     }

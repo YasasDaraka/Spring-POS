@@ -12,7 +12,6 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="BackEnd" />
-          <element id="jpa-descriptors" facet="BackEnd/jpa/JPA" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:6.1.5" />
@@ -56,6 +55,7 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.16.1" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.16.1" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.16.1" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1" />
           <element id="library" level="project" name="Maven: org.modelmapper:modelmapper:3.2.0" />
         </element>
       </element>

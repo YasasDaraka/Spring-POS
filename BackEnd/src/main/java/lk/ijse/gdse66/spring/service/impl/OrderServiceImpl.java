@@ -19,7 +19,7 @@ public class OrderServiceImpl implements OrderService {
     Tranformer tranformer;
     @Override
     public List<OrderDTO> getAllOrder() {
-        return tranformer.toOrderDTOList(orderRepo.findAll());
+        return tranformer.convert(orderRepo.findAll(), Tranformer.ClassType.ORDER_DTO_LIST);
     }
 
     @Override
