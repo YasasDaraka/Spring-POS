@@ -35,9 +35,9 @@ public class OrderController {
         System.out.println(orderService.searchOrder(id).toString());
         return orderService.searchOrder(id);
     }
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> saveOrder(OrderDTO dto) {
+    public ResponseEntity<Void> saveOrder(@RequestBody OrderDTO dto) {
         orderService.saveOrder(dto);
         return ResponseEntity.ok().build();
     }
