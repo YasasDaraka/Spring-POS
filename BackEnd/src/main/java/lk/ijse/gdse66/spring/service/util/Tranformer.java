@@ -61,7 +61,7 @@ public class Tranformer {
                 .addMapping(src -> src.getOid(), OrderDTO::setOid)
                 .addMapping(src -> src.getCustomer().getId(), OrderDTO::setCusID)
                 .addMapping(src -> src.getDate(), OrderDTO::setDate)
-                .addMappings(mapper -> mapper.skip(OrderDTO::setOrderDetails)) // skip setOrderDetails
+                .addMappings(mapper -> mapper.skip(OrderDTO::setOrderDetails))
                 .map(order);
         List<OrderDetailsDTO> orderDetailsDTOList = order.getOrderDetails().stream()
                 .map(this::toOrderDetailsDTO)
@@ -74,11 +74,11 @@ public class Tranformer {
         Order order = mapper.typeMap(OrderDTO.class, Order.class)
                 .addMapping(src -> src.getOid(), Order::setOid)
                 .addMapping(src -> src.getDate(), Order::setDate)
-                .addMappings(mapper -> mapper.skip(Order::setCustomer))//skip set Customer
+                .addMappings(mapper -> mapper.skip(Order::setCustomer))
                 .addMappings(mapper ->
                     mapper.map(OrderDTO::getCusID, (dest, value) -> dest.getCustomer().setId((String) value))
                  )
-                .addMappings(mapper -> mapper.skip(Order::setOrderDetails)) // skip setOrderDetails on order
+                .addMappings(mapper -> mapper.skip(Order::setOrderDetails))
                 .map(orderDTO);
         List<OrderDetails> orderDetails = orderDTO.getOrderDetails().stream()
                 .map(this::toOrderDetailsEntity)
@@ -98,9 +98,9 @@ public class Tranformer {
 
     public OrderDetails toOrderDetailsEntity(OrderDetailsDTO detailsDTO) {
         return mapper.typeMap(OrderDetailsDTO.class, OrderDetails.class)
-                .addMappings(mapper -> mapper.skip(OrderDetails::setOrderDetailPK))//skip detailPK
-                .addMappings(mapper -> mapper.skip(OrderDetails::setOrder))//skip orders
-                .addMappings(mapper -> mapper.skip(OrderDetails::setItem))//skip item
+                .addMappings(mapper -> mapper.skip(OrderDetails::setOrderDetailPK))
+                .addMappings(mapper -> mapper.skip(OrderDetails::setOrder))
+                .addMappings(mapper -> mapper.skip(OrderDetails::setItem))
                 .addMappings(mapper -> {
                     mapper.map(OrderDetailsDTO::getOid, (dest, value) -> dest.getOrder().setOid((String) value));
                     mapper.map(OrderDetailsDTO::getItmCode, (dest, value) -> dest.getItem().setItmCode((String) value));
