@@ -83,7 +83,6 @@ public class Tranformer {
         Order order = mapper.typeMap(OrderDTO.class, Order.class)
                 .addMapping(src -> src.getOid(), Order::setOid)
                 .addMapping(src -> src.getDate(), Order::setDate)
-                /*.addMappings(mapper -> mapper.skip(Order::setCustomer))*/
                 .addMappings(mapper ->
                     mapper.map(OrderDTO::getCusID, (dest, value) -> dest.getCustomer().setId((String) value))
                  )
@@ -107,15 +106,11 @@ public class Tranformer {
 
     public OrderDetails toOrderDetailsEntity(OrderDetailsDTO detailsDTO) {
         return mapper.typeMap(OrderDetailsDTO.class, OrderDetails.class)
-                /*.addMappings(mapper -> mapper.skip(OrderDetails::setOrderDetailPK))*/
-                /*.addMappings(mapper -> mapper.skip(OrderDetails::setOrder))*/
-                /*.addMappings(mapper -> mapper.skip(OrderDetails::setItem))*/
                 .addMappings(mapper -> {
                     mapper.map(OrderDetailsDTO::getItmCode, (dest, value) -> dest.getOrderDetailPK().setItmCode((String)value));
                     mapper.map(OrderDetailsDTO::getOid, (dest, value) -> dest.getOrderDetailPK().setOid((String)value));
                     mapper.map(OrderDetailsDTO::getOid, (dest, value) -> dest.getOrder().setOid((String) value));
                     mapper.map(OrderDetailsDTO::getItmCode, (dest, value) -> dest.getItem().setItmCode((String) value));
-                    /*mapper.map(OrderDetailsDTO::getItmPrice, (dest, value) -> dest.getItem().setItmPrice((double) value));*/
                 })
                 .addMapping(src -> src.getItmQTY(), OrderDetails::setItmQTY)
                 .map(detailsDTO);
