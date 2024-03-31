@@ -2,8 +2,10 @@ package lk.ijse.gdse66.spring.config;
 
 import jakarta.persistence.EntityManagerFactory;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -22,13 +24,15 @@ public class JPAConfig {
     public JPAConfig() {
         System.out.println("JPAConfig");
     }
+    @Autowired
+    Environment env;
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl("jdbc:mysql://localhost:3306/spring?createDatabaseIfNotExist=true");
-        dataSource.setUsername("root");
-        dataSource.setPassword("1234");
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl(env.getRequiredProperty("spring.url"));
+        dataSource.setUsername(env.getRequiredProperty("spring.username"));
+        dataSource.setPassword(env.getRequiredProperty("spring.password"));
+        dataSource.setDriverClassName(env.getRequiredProperty("spring.driver.classname"));
         return dataSource;
     }
 
@@ -39,7 +43,7 @@ public class JPAConfig {
         vendorAdapter.setGenerateDdl(true);
         vendorAdapter.setDatabase(Database.MYSQL);
         vendorAdapter.setShowSql(true);
-        vendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL8Dialect");
+        vendorAdapter.setDatabasePlatform(env.getRequiredProperty("spring.dialect"));
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
