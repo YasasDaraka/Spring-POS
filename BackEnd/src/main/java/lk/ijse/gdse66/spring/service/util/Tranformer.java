@@ -2,9 +2,11 @@ package lk.ijse.gdse66.spring.service.util;
 
 import lk.ijse.gdse66.spring.dto.CustomerDTO;
 import lk.ijse.gdse66.spring.dto.ItemDTO;
+import lk.ijse.gdse66.spring.dto.OrderDTO;
 import lk.ijse.gdse66.spring.dto.OrderDetailsDTO;
 import lk.ijse.gdse66.spring.entity.Customer;
 import lk.ijse.gdse66.spring.entity.Item;
+import lk.ijse.gdse66.spring.entity.Order;
 import lk.ijse.gdse66.spring.entity.OrderDetails;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Component
@@ -30,7 +34,9 @@ public class Tranformer {
         ITEM_DTO_LIST,
         ITEM_ENTITY_LIST,
         ORDER_DETAILS_ENTITY,
-        ORDER_DETAILS_DTO
+        ORDER_DETAILS_DTO,
+        ORDER_ENTITY,
+        ORDER_DTO
     }
 
     public <R> R convert(Object from, ClassType to) {
@@ -40,10 +46,47 @@ public class Tranformer {
         if (getType(to) instanceof OrderDetails) {
             return (R) toOrderDetailsEntity((OrderDetailsDTO) from);
         }
+        if (getType(to) instanceof OrderDTO) {
+            return (R) toOrderDTO((Order) from);
+        }
+        if (getType(to) instanceof Order) {
+            return (R) toOrderEntity((OrderDTO) from);
+        }
         return (R) mapper.map(from, getType(to));
 
     }
 
+    public OrderDTO toOrderDTO(Order order) {
+        OrderDTO orderDTO = mapper.typeMap(Order.class, OrderDTO.class)
+                .addMapping(src -> src.getOid(), OrderDTO::setOid)
+                .addMapping(src -> src.getCustomer().getId(), OrderDTO::setCusID)
+                .addMapping(src -> src.getDate(), OrderDTO::setDate)
+                .addMappings(mapper -> mapper.skip(OrderDTO::setOrderDetails)) // skip setOrderDetails
+                .map(order);
+        List<OrderDetailsDTO> orderDetailsDTOList = order.getOrderDetails().stream()
+                .map(this::toOrderDetailsDTO)
+                .collect(Collectors.toList());
+        orderDTO.setOrderDetails(orderDetailsDTOList);
+
+        return orderDTO;
+    }
+    public Order toOrderEntity(OrderDTO orderDTO) {
+        Order order = mapper.typeMap(OrderDTO.class, Order.class)
+                .addMapping(src -> src.getOid(), Order::setOid)
+                .addMapping(src -> src.getDate(), Order::setDate)
+                .addMappings(mapper -> mapper.skip(Order::setCustomer))//skip set Customer
+                .addMappings(mapper ->
+                    mapper.map(OrderDTO::getCusID, (dest, value) -> dest.getCustomer().setId((String) value))
+                 )
+                .addMappings(mapper -> mapper.skip(Order::setOrderDetails)) // skip setOrderDetails on order
+                .map(orderDTO);
+        List<OrderDetails> orderDetails = orderDTO.getOrderDetails().stream()
+                .map(this::toOrderDetailsEntity)
+                .collect(Collectors.toList());
+        order.setOrderDetails(orderDetails);
+
+        return order;
+    }
     public OrderDetailsDTO toOrderDetailsDTO(OrderDetails orderDetail) {
         return mapper.typeMap(OrderDetails.class, OrderDetailsDTO.class)
                 .addMapping(src -> src.getOrderDetailPK().getOid(), OrderDetailsDTO::setOid)
@@ -74,8 +117,7 @@ public class Tranformer {
             case CUS_ENTITY:
                 return Customer.class;
             case CUS_DTO_LIST:
-                return new TypeToken<ArrayList<CustomerDTO>>() {
-                }.getType();
+                return new TypeToken<ArrayList<CustomerDTO>>() {}.getType();
             case CUS_ENTITY_LIST:
                 return new TypeToken<ArrayList<Customer>>() {}.getType();
             case ITEM_DTO:
@@ -90,6 +132,10 @@ public class Tranformer {
                 return new TypeToken<OrderDetailsDTO>() {}.getType();
             case ORDER_DETAILS_ENTITY:
                 return new TypeToken<OrderDetails>() {}.getType();
+            case ORDER_ENTITY:
+                return new TypeToken<Order>() {}.getType();
+            case ORDER_DTO:
+                return new TypeToken<OrderDTO>() {}.getType();
             default:
                 throw new IllegalArgumentException("Unsupported ClassType: " + type);
         }
