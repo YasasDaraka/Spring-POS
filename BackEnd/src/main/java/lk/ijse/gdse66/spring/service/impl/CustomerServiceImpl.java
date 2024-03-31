@@ -3,6 +3,7 @@ package lk.ijse.gdse66.spring.service.impl;
 import lk.ijse.gdse66.spring.dto.CustomerDTO;
 import lk.ijse.gdse66.spring.repository.CustomerRepo;
 import lk.ijse.gdse66.spring.service.CustomerService;
+import lk.ijse.gdse66.spring.service.exception.NotFoundException;
 import lk.ijse.gdse66.spring.service.util.Tranformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,7 +48,7 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteCustomer(String id) {
         customerRepo.findById(id).ifPresentOrElse(
                 customer -> customerRepo.deleteById(id),
-                ()-> {throw new RuntimeException("Customer Not Exist");}
+                ()-> {throw new NotFoundException("Customer Not Exist");}
         );
     }
 }

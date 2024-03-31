@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@ComponentScan(basePackages = {"lk.ijse.gdse66.spring.service"})
+@ComponentScan(basePackages = {"lk.ijse.gdse66.spring.service","lk.ijse.gdse66.spring.adviser"})
 @Import({JPAConfig.class})
 public class WebRootConfig {
     public WebRootConfig() {
