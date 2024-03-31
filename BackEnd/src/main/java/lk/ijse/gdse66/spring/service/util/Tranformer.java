@@ -48,11 +48,11 @@ public class Tranformer {
         if (getType(to) instanceof OrderDetails) {
             return (R) toOrderDetailsEntity((OrderDetailsDTO) from);
         }
-        if (getType(to) instanceof OrderDTO) {
-            return (R) toOrderDTO((Order) from);
-        }
         if (getType(to) instanceof Order) {
             return (R) toOrderEntity((OrderDTO) from);
+        }
+        if (to.equals(ClassType.ORDER_DTO)) {
+            return (R) toOrderDTO((Order) from);
         }
         if (to.equals(ClassType.ORDER_DTO_LIST)){
             return (R) toOrderDTOList((List<Order>) from);
@@ -138,13 +138,13 @@ public class Tranformer {
             case ITEM_ENTITY_LIST:
                 return new TypeToken<ArrayList<Item>>() {}.getType();
             case ORDER_DETAILS_DTO:
-                return new TypeToken<OrderDetailsDTO>() {}.getType();
+                return OrderDetailsDTO.class;
             case ORDER_DETAILS_ENTITY:
-                return new TypeToken<OrderDetails>() {}.getType();
+                return OrderDetails.class;
             case ORDER_ENTITY:
-                return new TypeToken<Order>() {}.getType();
+                return Order.class;
             case ORDER_DTO:
-                return new TypeToken<OrderDTO>() {}.getType();
+                return OrderDTO.class;
             case ORDER_ENTITY_LIST:
                 return new TypeToken<ArrayList<Order>>() {}.getType();
             case ORDER_DTO_LIST:

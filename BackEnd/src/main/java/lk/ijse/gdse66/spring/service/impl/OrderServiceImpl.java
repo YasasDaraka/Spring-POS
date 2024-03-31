@@ -1,6 +1,5 @@
 package lk.ijse.gdse66.spring.service.impl;
 
-import lk.ijse.gdse66.spring.dto.CustomerDTO;
 import lk.ijse.gdse66.spring.dto.OrderDTO;
 import lk.ijse.gdse66.spring.dto.OrderDetailsDTO;
 import lk.ijse.gdse66.spring.entity.Item;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional

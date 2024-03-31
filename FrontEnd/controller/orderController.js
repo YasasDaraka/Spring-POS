@@ -62,7 +62,7 @@ function searchOrder(id) {
     console.log(id);
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: "http://localhost:8080/BackEnd/order?oid=" + id + "&info=search",
+            url: "http://localhost:8080/BackEnd/order/search/"+id,
             method: "GET",
             dataType: "json",
             success: function (res) {
