@@ -36,7 +36,9 @@ public class Tranformer {
         ORDER_DETAILS_ENTITY,
         ORDER_DETAILS_DTO,
         ORDER_ENTITY,
-        ORDER_DTO
+        ORDER_DTO,
+        ORDER_ENTITY_LIST,
+        ORDER_DTO_LIST
     }
 
     public <R> R convert(Object from, ClassType to) {
@@ -55,7 +57,11 @@ public class Tranformer {
         return (R) mapper.map(from, getType(to));
 
     }
-
+    public List<OrderDTO> toOrderDTOList(List<Order> orders) {
+        return orders.stream()
+                .map(this::toOrderDTO)
+                .collect(Collectors.toList());
+    }
     public OrderDTO toOrderDTO(Order order) {
         OrderDTO orderDTO = mapper.typeMap(Order.class, OrderDTO.class)
                 .addMapping(src -> src.getOid(), OrderDTO::setOid)
@@ -136,6 +142,10 @@ public class Tranformer {
                 return new TypeToken<Order>() {}.getType();
             case ORDER_DTO:
                 return new TypeToken<OrderDTO>() {}.getType();
+            case ORDER_ENTITY_LIST:
+                return new TypeToken<ArrayList<Order>>() {}.getType();
+            case ORDER_DTO_LIST:
+                return new TypeToken<ArrayList<OrderDTO>>() {}.getType();
             default:
                 throw new IllegalArgumentException("Unsupported ClassType: " + type);
         }
