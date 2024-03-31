@@ -27,16 +27,5 @@ public class OrderDetails {
     @JoinColumn(name = "itmCode", referencedColumnName = "itmCode", insertable = false, updatable = false)
     private Item item;
 
-
-    /*public OrderDetailsDTO toDto() {
-        OrderDetailsDTO details = new OrderDetailsDTO();
-        details.setOid(String.valueOf(this.orderDetailPK.getOid()));
-        details.setItmCode(this.item.getItmCode());
-        details.setItmQTY(this.itmQTY);
-        details.setItmPrice(this.item.getItmPrice());
-        return details;
-    }*/
-
-
 }
 
