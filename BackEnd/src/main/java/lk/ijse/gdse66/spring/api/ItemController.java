@@ -28,14 +28,14 @@ public class ItemController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(path = "/search/{itmCode}")
+    @GetMapping(path = "/search/{itmCode:I00-0*[1-9]\\d{0,2}}")
     public ItemDTO getItem(@PathVariable("itmCode") String itmCode){
         return itemService.searchItem(itmCode);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> saveItem(@ModelAttribute ItemDTO dto){
+    public ResponseEntity<Void> saveItem(@Valid @ModelAttribute ItemDTO dto){
         itemService.saveItem(dto);
         return ResponseEntity.ok().build();
     }
