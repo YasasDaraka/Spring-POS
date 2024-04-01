@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    setTime();
+    setDate();
     $("#order-add-item").prop("disabled", true);
     $("#btnSubmitOrder").prop("disabled", true);
     $("#order-clear").prop("disabled", true);

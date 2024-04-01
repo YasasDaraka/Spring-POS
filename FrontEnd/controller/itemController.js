@@ -12,6 +12,8 @@ $("#itmSave").click(function () {
 });
 
 $(document).ready(function(){
+    setTime();
+    setDate();
     $("#itmCode").prop('disabled', true);
     $("#itmName").prop('disabled', true);
     $("#itmPrice").prop('disabled', true);

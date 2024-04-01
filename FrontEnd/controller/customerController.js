@@ -11,6 +11,8 @@ $("#cusSave").click(function () {
 });
 
 $(document).ready(function () {
+    setTime();
+    setDate();
     $("#customerID").prop('disabled', true);
     $("#customerName").prop('disabled', true);
     $("#customerAddress").prop('disabled', true);

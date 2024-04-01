@@ -1,4 +1,5 @@
-
+setTime();
+setDate();
 let home = $("#home");
 let customer = $("#customer");
 let item = $("#item");
@@ -107,3 +108,33 @@ btnOrderElements.each(function() {
         }
     });
 });
+function setDate() {
+    let currentDate = new Date();
+    let year = currentDate.getFullYear();
+    let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+    let day = currentDate.getDate().toString().padStart(2, '0');
+    let formattedDate = year + '-' + month + '-' + day;
+    $('.currDate').text(`Date : ${formattedDate}`);
+}
+
+function setTime() {
+    setInterval(function (){
+        let currentTime = new Date();
+        let hours = currentTime.getHours();
+        let minutes = currentTime.getMinutes();
+        let seconds = currentTime.getSeconds();
+
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+
+        const formattedTime = hours + ":" + minutes + ":" + seconds;
+        $('.currTime').text(`Time : ${formattedTime}`);
+    },1000);
+}
