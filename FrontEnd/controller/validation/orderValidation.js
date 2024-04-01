@@ -151,6 +151,7 @@ $("#orderQty").on("keydown keyup input", function (e){
 function clearAll() {
     $("#cName,#cAddress,#itemName,#price,#qtyOnHand,#orderQty,#orderDate,#txtCash,#txtDiscount,#txtBalance").val("");
     $("#cName,#cAddress,#itemName,#price,#qtyOnHand,#orderQty,#orderDate,#txtCash").css("border", "1px solid #ced4da");
+    $("#QtyError").text("");
     $("#total,#subtotal").text("0");
     $("#order-add-item").prop("disabled", true);
     $("#btnSubmitOrder").prop("disabled", true);

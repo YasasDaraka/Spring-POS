@@ -1,17 +1,16 @@
-
 getAllCustomers();
 
 
 $("#cusSave").click(function () {
 
-    if (checkAll()){
+    if (checkAll()) {
         saveCustomer();
-    }else{
+    } else {
         alert("Error");
     }
 });
 
-$(document).ready(function(){
+$(document).ready(function () {
     $("#customerID").prop('disabled', true);
     $("#customerName").prop('disabled', true);
     $("#customerAddress").prop('disabled', true);
@@ -38,6 +37,7 @@ $(document).ready(function(){
         'max-width': 'calc(100%/3*1)'
     });
 });
+
 function generateCustomerId() {
     loadCusAr().then(function (customerDB) {
         if (customerDB.length === 0) {
@@ -58,7 +58,7 @@ function generateCustomerId() {
     });
 }
 
-function loadCusAr(){
+function loadCusAr() {
     return new Promise(function (resolve, reject) {
         var ar;
         $.ajax({
@@ -76,7 +76,7 @@ function loadCusAr(){
     });
 }
 
-$('#cusAdd').click(function(){
+$('#cusAdd').click(function () {
     $("#customerID").prop('disabled', false);
     $("#customerName").prop('disabled', false);
     $("#customerAddress").prop('disabled', false);
@@ -113,25 +113,43 @@ $("#cusDelete").click(function () {
 
     validCustomer(id).then(function (isValid) {
         if (isValid == false) {
-            alert("No such Customer..please check the ID");
+            //alert("No such Customer..please check the ID");
+            swal("Error", "No such Customer..please check the ID", "error");
             clearCustomerInputFields();
         } else {
-            let consent = confirm("Do you want to delete.?");
-            if (consent) {
-                $.ajax({
-                    url: "http://localhost:8080/BackEnd/customer?cusId="+id,
-                    method: "DELETE",
-                    success:function (res) {
-                        console.log(res);
-                        alert("Customer Delete Successfully");
-                        clearCustomerInputFields();
-                        getAllCustomers();
+            /*let consent = confirm("Do you want to delete.?");
+            if (consent) {}*/
+            swal("Do you want to delete this customer.?", {
+                buttons: {
+                    cancel1: {
+                        text: "Cancel",
+                        className: "custom-cancel-btn",
                     },
-                    error:function (ob, textStatus, error) {
-                        alert(textStatus+" : Error Customer Not Delete")
+                    ok: {
+                        text: "OK",
+                        value: "confirm",
+                        className: "custom-ok-btn",
                     }
-                });
-            }
+                },
+            }).then((value) => {
+                if (value === "confirm") {
+                    $.ajax({
+                        url: "http://localhost:8080/BackEnd/customer?cusId=" + id,
+                        method: "DELETE",
+                        success: function (res) {
+                            console.log(res);
+                            // alert("Customer Delete Successfully");
+                            swal("Deleted", "Customer Delete Successfully", "success");
+                            clearCustomerInputFields();
+                            getAllCustomers();
+                        },
+                        error: function (ob, textStatus, error) {
+                            //alert(textStatus + " : Error Customer Not Delete")
+                            swal("Error", textStatus + "Error Customer Not Delete", "error");
+                        }
+                    });
+                }
+            });
         }
     });
 
@@ -143,38 +161,57 @@ $("#cusDelete").click(function () {
 
 $("#cusUpdate").click(function () {
     let id = $("#customerID").val();
-    validCustomer(id).then(function (isValid){
-    if (isValid) {
-        let consent = confirm("Do you really want to update this customer.?");
-        if (consent) {
-            var array = $("#CusForm").serializeArray();
-            var data = {};
-            array.forEach(function (field) {
-                data[field.name] = field.value;
-            });
-            console.log(data)
-            $.ajax({
-                url: "http://localhost:8080/BackEnd/customer",
-                method: "PUT",
-                data:JSON.stringify(data),
-                contentType:"application/json",
-                success:function (res) {
-                    console.log(res);
-                    alert("Customer Update Successfully")
-                    getAllCustomers();
+    validCustomer(id).then(function (isValid) {
+        if (isValid) {
+            /*let consent = confirm("Do you really want to update this customer.?");
+            if (consent) {}*/
+            swal("Do you really want to update this customer.?", {
+                buttons: {
+                    cancel1: {
+                        text: "Cancel",
+                        className: "custom-cancel-btn",
+                    },
+                    ok: {
+                        text: "OK",
+                        value: "confirm",
+                        className: "custom-ok-btn",
+                    }
                 },
-                error:function (ob, textStatus, error) {
-                    alert(textStatus+" : Error Customer Not Update");
+            }).then((value) => {
+                if (value === "confirm") {
+                    var array = $("#CusForm").serializeArray();
+                    var data = {};
+                    array.forEach(function (field) {
+                        data[field.name] = field.value;
+                    });
+                    console.log(data)
+                    $.ajax({
+                        url: "http://localhost:8080/BackEnd/customer",
+                        method: "PUT",
+                        data: JSON.stringify(data),
+                        contentType: "application/json",
+                        success: function (res) {
+                            console.log(res);
+                            //alert("Customer Update Successfully")
+                            swal("Updated", "Customer Update Successfully", "success");
+                            getAllCustomers();
+                        },
+                        error: function (ob, textStatus, error) {
+                            //alert(textStatus+" : Error Customer Not Update");
+                            swal("Error", textStatus + "Error Customer Not Update", "error");
+                        }
+                    });
+                    $("#customerID").prop('disabled', true);
+                    $("#customerName").prop('disabled', true);
+                    $("#customerAddress").prop('disabled', true);
+                    clearCustomerInputFields();
                 }
             });
-            $("#customerID").prop('disabled', true);
-            $("#customerName").prop('disabled', true);
-            $("#customerAddress").prop('disabled', true);
-            clearCustomerInputFields();
+
+        } else {
+            swal("Error", "No such Customer..please check the ID", "error");
+            /*alert("No such Customer..please check the ID");*/
         }
-    } else {
-        alert("No such Customer..please check the ID");
-    }
     });
 
 });
@@ -190,31 +227,32 @@ function saveCustomer() {
     validCustomer(id).then(function (isValid) {
         console.log(isValid)
         if (!isValid) {
-        console.log(isValid)
-        /*var array = $("#CusForm").serializeArray();
-        var data = {};
-        array.forEach(function (field) {
-            data[field.name] = field.value;
-        });*/
-        var data = $("#CusForm").serialize();
-        $.ajax({
-            url:"http://localhost:8080/BackEnd/customer",
-            method: "POST",
-            data:data,
-            contentType:"application/x-www-form-urlencoded",
-            success:function (res,textStatus,jsXH) {
-                console.log(res);
-                alert("Customer Added Successfully");
-                getAllCustomers();
-            },
-            error:function (ob, textStatus, error) {
-                alert(textStatus+" : Error Customer Not Added")
-            }
-        });
-    }else {
-        alert("Customer already exits.!");
-        clearCustomerInputFields();
-    }
+            console.log(isValid)
+            /*var array = $("#CusForm").serializeArray();
+            var data = {};
+            array.forEach(function (field) {
+                data[field.name] = field.value;
+            });*/
+            var data = $("#CusForm").serialize();
+            $.ajax({
+                url: "http://localhost:8080/BackEnd/customer",
+                method: "POST",
+                data: data,
+                contentType: "application/x-www-form-urlencoded",
+                success: function (res, textStatus, jsXH) {
+                    console.log(res);
+                    alert("Customer Added Successfully");
+                    getAllCustomers();
+                },
+                error: function (ob, textStatus, error) {
+                    alert(textStatus + " : Error Customer Not Added")
+                }
+            });
+        } else {
+            //alert("Customer already exits.!");
+            swal("Error", "Customer already exits.!", "error");
+            clearCustomerInputFields();
+        }
     });
 }
 
@@ -222,9 +260,9 @@ function getAllCustomers() {
 
     $("#customerTable").empty();
     $.ajax({
-        url:"http://localhost:8080/BackEnd/customer/getAll",
+        url: "http://localhost:8080/BackEnd/customer/getAll",
         method: "GET",
-        success:function (res) {
+        success: function (res) {
             console.log(res);
             for (var r of res) {
                 let row = `<tr>
@@ -251,17 +289,18 @@ function getAllCustomers() {
         }
     });
 }
+
 function validCustomer(id) {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: "http://localhost:8080/BackEnd/customer/search/"+id,
+            url: "http://localhost:8080/BackEnd/customer/search/" + id,
             method: "GET",
             dataType: "json",
             success: function (res, textStatus, xhr) {
                 console.log(res);
-                if(xhr.status===200){
+                if (xhr.status === 200) {
                     resolve(true);
-                }else {
+                } else {
                     resolve(false);
                 }
             },
@@ -271,26 +310,28 @@ function validCustomer(id) {
         });
     });
 }
+
 function searchCustomer(id) {
     console.log(id);
     return new Promise(function (resolve, reject) {
-    $.ajax({
-        url:"http://localhost:8080/BackEnd/customer/search/"+id,
-        method: "GET",
-        dataType:"json",
-        success:function (res) {
-            console.log(res);
-            resolve(res);
-        },
-        error:function (ob, textStatus, error) {
-            resolve(error);
-        }
-    });
+        $.ajax({
+            url: "http://localhost:8080/BackEnd/customer/search/" + id,
+            method: "GET",
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+                resolve(res);
+            },
+            error: function (ob, textStatus, error) {
+                resolve(error);
+            }
+        });
     });
 }
-$('#cusSearch').click(function(){
+
+$('#cusSearch').click(function () {
     let id = $("#customerID").val();
-    searchCustomer(id).then(function (res){
+    searchCustomer(id).then(function (res) {
         $("#customerName").val(res.name);
         $("#customerAddress").val(res.address);
     });
