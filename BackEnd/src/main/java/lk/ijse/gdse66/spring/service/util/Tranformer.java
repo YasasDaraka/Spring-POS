@@ -38,7 +38,8 @@ public class Tranformer {
         ORDER_ENTITY,
         ORDER_DTO,
         ORDER_ENTITY_LIST,
-        ORDER_DTO_LIST
+        ORDER_DTO_LIST,
+        ORDER_DETAILS_DTO_LIST
     }
 
     public <R> R convert(Object from, ClassType to) {
@@ -57,12 +58,20 @@ public class Tranformer {
         if (to.equals(ClassType.ORDER_DTO_LIST)){
             return (R) toOrderDTOList((List<Order>) from);
         }
+        if (to.equals(ClassType.ORDER_DETAILS_DTO_LIST)){
+            return (R) toOrderDetailDTOList((List<OrderDetails>) from);
+        }
         return (R) mapper.map(from, getType(to));
 
     }
     public List<OrderDTO> toOrderDTOList(List<Order> orders) {
         return orders.stream()
                 .map(this::toOrderDTO)
+                .collect(Collectors.toList());
+    }
+    public List<OrderDetailsDTO> toOrderDetailDTOList(List<OrderDetails> orders) {
+        return orders.stream()
+                .map(this::toOrderDetailsDTO)
                 .collect(Collectors.toList());
     }
     public OrderDTO toOrderDTO(Order order) {
@@ -100,7 +109,7 @@ public class Tranformer {
                 .addMapping(src -> src.getOrderDetailPK().getOid(), OrderDetailsDTO::setOid)
                 .addMapping(src -> src.getItem().getItmCode(), OrderDetailsDTO::setItmCode)
                 .addMapping(src -> src.getItem().getItmPrice(), OrderDetailsDTO::setItmPrice)
-                .addMapping(src -> src.getItem().getItmQTY(), OrderDetailsDTO::setItmQTY)
+                .addMapping(src -> src.getItmQTY(), OrderDetailsDTO::setItmQTY)
                 .map(orderDetail);
     }
 
@@ -146,6 +155,8 @@ public class Tranformer {
                 return new TypeToken<ArrayList<Order>>() {}.getType();
             case ORDER_DTO_LIST:
                 return new TypeToken<ArrayList<OrderDTO>>() {}.getType();
+            case ORDER_DETAILS_DTO_LIST:
+                return new TypeToken<ArrayList<OrderDetailsDTO>>() {}.getType();
             default:
                 throw new IllegalArgumentException("Unsupported ClassType: " + type);
         }

@@ -18,7 +18,6 @@ $("#itemName,#price,#qtyOnHand,#orderQty").on("keydown keyup input", function (e
     let indexNo = o_Array.indexOf(o_Array.find((c) => c.field.attr("id") == e.target.id));
     checkOrderValidations(o_Array[indexNo]);
         setAddItemBtn();
-
 });
 function setAddItemBtn() {
     let nm =  Item_NAME_REGEX.test($("#itemName").val());
@@ -27,17 +26,28 @@ function setAddItemBtn() {
     let oq =  QTY_REGEX.test($("#orderQty").val());
 
     if(nm && pr && qh && oq){
-        $("#order-add-item").prop("disabled", false);
+        if (QTYValidate){
+            $("#order-add-item").prop("disabled", false);
+        }else {
+            $("#order-add-item").prop("disabled", true);
+        }
     }else {
         $("#order-add-item").prop("disabled", true);
     }
+}
+function QTYValidate() {
+    let qty = parseInt($("#qtyOnHand").val());
+    let orderQty = parseInt($("#orderQty").val());
+    if (qty<orderQty) {
+        return false;
+    }
+    return true;
 }
 $("#cName,#cAddress,#itemName,#price,#qtyOnHand,#orderQty").on("keydown keyup input", function (e) {
 
     let indexNo = o_Array.indexOf(o_Array.find((c) => c.field.attr("id") == e.target.id));
 
     checkOrderValidations(o_Array[indexNo]);
-
     setOrderBtn();
 
 });
@@ -71,7 +81,6 @@ function setOrderBtn() {
         if (Object.keys(order).length === 0) {
             if (checkAllOrder()) {
                 $("#btnSubmitOrder").prop("disabled", false);
-                $("#order-add-item").prop("disabled", false);
             } else {
                 $("#btnSubmitOrder").prop("disabled", true);
 
@@ -108,6 +117,7 @@ function cashValidate() {
     }
     return false;
 }
+
 $("#orderQty").on("keydown keyup input", function (e){
     let qty = parseInt($("#qtyOnHand").val());
     let orderQty = parseInt($("#orderQty").val());
@@ -116,8 +126,12 @@ $("#orderQty").on("keydown keyup input", function (e){
         $("#orderQty").css("border", "2px solid green");
         $("#QtyError").text("");
         $("#order-add-item").prop("disabled", false);
+    }if (qty<orderQty && qty>=0){
+        $("#orderQty").css("border", "2px solid red");
+        $("#QtyError").text("");
+        $("#order-add-item").prop("disabled", true);
     }
-    else if (qty<orderQty){
+     if (qty<orderQty){
         $("#orderQty").css("border", "2px solid red");
         $("#QtyError").text(`Please Enter Amount lower than: ${qty}`);
         $("#order-add-item").prop("disabled", true);
@@ -142,7 +156,7 @@ function clearAll() {
     $("#btnSubmitOrder").prop("disabled", true);
     $("#order-table").empty();
 }
-$("#cName,#cAddress,#itemName,#price,#qtyOnHand,#orderQty,#orderDate,#txtCash,#txtDiscount,#txtBalance").on("keydown keyup input", function (e){
+$("#cName,#cAddress,#itemName,#price,#qtyOnHand,#orderQty,#orderDate,#txtCash,#txtDiscount,#txtBalance,#QtyError").on("keydown keyup input", function (e){
     var empty = true;
     $("#cName, #cAddress, #itemName, #price, #qtyOnHand, #orderQty, #orderDate, #txtCash, #txtDiscount, #txtBalance").each(function() {
         if ($(this).val() !== "") {

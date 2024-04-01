@@ -314,7 +314,7 @@ function loadOrderDetailAr() {
     return new Promise(function (resolve, reject) {
         var ar;
         $.ajax({
-            url: "http://localhost:8080/BackEnd/orderDetails",
+            url: "http://localhost:8080/BackEnd/orderDetail/getAll",
             method: "GET",
             success: function (res) {
                 console.log(res);
