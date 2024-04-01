@@ -44,7 +44,7 @@ function loadOrderAr() {
     return new Promise(function (resolve, reject) {
         var ar;
         $.ajax({
-            url: "http://localhost:8080/BackEnd/order?info=getall",
+            url: "http://localhost:8080/BackEnd/order/getAll",
             method: "GET",
             success: function (res) {
                 console.log(res);
