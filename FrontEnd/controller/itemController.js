@@ -1,17 +1,16 @@
-
 getAllItem();
 
 
 $("#itmSave").click(function () {
 
-    if (checkAllItem()){
+    if (checkAllItem()) {
         saveItem();
-    }else{
+    } else {
         alert("Error");
     }
 });
 
-$(document).ready(function(){
+$(document).ready(function () {
     setTime();
     setDate();
     $("#itmCode").prop('disabled', true);
@@ -41,6 +40,7 @@ $(document).ready(function(){
         'max-width': 'calc(100%/4*1)'
     });
 });
+
 function generateItemId() {
     loadItemAr().then(function (itemDB) {
         if (itemDB.length === 0) {
@@ -60,7 +60,8 @@ function generateItemId() {
         console.error("Error loading Item data:", error);
     });
 }
-function loadItemAr(){
+
+function loadItemAr() {
     return new Promise(function (resolve, reject) {
         var ar;
         $.ajax({
@@ -77,7 +78,8 @@ function loadItemAr(){
         });
     });
 }
-$('#itmAdd').click(function(){
+
+$('#itmAdd').click(function () {
     $("#itmCode").prop('disabled', false);
     $("#itmName").prop('disabled', false);
     $("#itmPrice").prop('disabled', false);
@@ -125,16 +127,16 @@ $("#itmDelete").click(function () {
             let consent = confirm("Do you want to delete.?");
             if (consent) {
                 $.ajax({
-                    url: "http://localhost:8080/BackEnd/item?itmCode="+id,
+                    url: "http://localhost:8080/BackEnd/item?itmCode=" + id,
                     method: "DELETE",
-                    success:function (res) {
+                    success: function (res) {
                         console.log(res);
                         alert("Item Delete Successfully");
                         clearItemInputFields();
                         getAllItem();
                     },
-                    error:function (ob, textStatus, error) {
-                        alert(textStatus+" : Error Item Not Delete")
+                    error: function (ob, textStatus, error) {
+                        alert(textStatus + " : Error Item Not Delete")
                     }
                 });
             }
@@ -150,36 +152,53 @@ $("#itmDelete").click(function () {
 $("#itmUpdate").click(function () {
 
     let id = $("#itmCode").val();
-    validItem(id).then(function (isValid){
+    validItem(id).then(function (isValid) {
         if (isValid) {
-            let consent = confirm("Do you really want to update this Item.?");
-            if (consent) {
-                var array = $("#itmForm").serializeArray();
-                var data = {};
-                array.forEach(function (field) {
-                    data[field.name] = field.value;
-                });
-                console.log(data)
-                $.ajax({
-                    url: "http://localhost:8080/BackEnd/item",
-                    method: "PUT",
-                    data:JSON.stringify(data),
-                    contentType:"application/json",
-                    success:function (res) {
-                        console.log(res);
-                        alert("Item Update Successfully")
-                        getAllItem();
+            /*let consent = confirm("Do you really want to update this Item.?");
+            if (consent) {}*/
+            swal("Do you really want to update this Item.?", {
+                buttons: {
+                    cancel1: {
+                        text: "Cancel",
+                        className: "custom-cancel-btn",
                     },
-                    error:function (ob, textStatus, error) {
-                        alert(textStatus+" : Error Item Not Update");
+                    ok: {
+                        text: "OK",
+                        value: "confirm",
+                        className: "custom-ok-btn",
                     }
-                });
-                $("#itmCode").prop('disabled', true);
-                $("#itmName").prop('disabled', true);
-                $("#itmQTY").prop('disabled', true);
-                $("#itmPrice").prop('disabled', true);
-                clearItemInputFields();
-            }
+                },
+            }).then((value) => {
+                if (value === "confirm") {
+                    var array = $("#itmForm").serializeArray();
+                    var data = {};
+                    array.forEach(function (field) {
+                        data[field.name] = field.value;
+                    });
+                    console.log(data)
+                    $.ajax({
+                        url: "http://localhost:8080/BackEnd/item",
+                        method: "PUT",
+                        data: JSON.stringify(data),
+                        contentType: "application/json",
+                        success: function (res) {
+                            console.log(res);
+                            //alert("Item Update Successfully")
+                            swal("Updated", "Item Update Successfully", "success");
+                            getAllItem();
+                        },
+                        error: function (ob, textStatus, error) {
+                            //alert(textStatus+" : Error Item Not Update");
+                            swal("Error", textStatus + "Error Item Not Update", "error");
+                        }
+                    });
+                    $("#itmCode").prop('disabled', true);
+                    $("#itmName").prop('disabled', true);
+                    $("#itmQTY").prop('disabled', true);
+                    $("#itmPrice").prop('disabled', true);
+                    clearItemInputFields();
+                }
+            });
         } else {
             //alert("No such Item..please check the Code");
             swal("Error", "No such Item..please check the Code", "error");
@@ -206,23 +225,23 @@ function saveItem() {
             });*/
             var data = $("#itmForm").serialize();
             $.ajax({
-                url:"http://localhost:8080/BackEnd/item",
+                url: "http://localhost:8080/BackEnd/item",
                 method: "POST",
-                data:data,
-                contentType:"application/x-www-form-urlencoded",
-                success:function (res,textStatus,jsXH) {
+                data: data,
+                contentType: "application/x-www-form-urlencoded",
+                success: function (res, textStatus, jsXH) {
                     console.log(res);
                     //alert("Item Added Successfully");
                     swal("Saved", "Item Added Successfully", "success");
                     getAllItem();
                 },
-                error:function (ob, textStatus, error) {
+                error: function (ob, textStatus, error) {
                     //alert(textStatus+" : Error Item Not Added")
                     swal("Error", textStatus + " : Error Item Not Added", "error");
                 }
             });
-        }else {
-           // alert("Item already exits.!");
+        } else {
+            // alert("Item already exits.!");
             swal("Error", "Item already exits.!", "error");
             clearItemInputFields();
         }
@@ -232,9 +251,9 @@ function saveItem() {
 function getAllItem() {
     $("#itemTable").empty();
     $.ajax({
-        url:"http://localhost:8080/BackEnd/item/getAll",
+        url: "http://localhost:8080/BackEnd/item/getAll",
         method: "GET",
-        success:function (res) {
+        success: function (res) {
             console.log(res);
             for (var r of res) {
                 let row = `<tr>
@@ -263,17 +282,18 @@ function getAllItem() {
         }
     });
 }
+
 function validItem(id) {
     return new Promise(function (resolve, reject) {
         $.ajax({
-            url: "http://localhost:8080/BackEnd/item/search/"+id,
+            url: "http://localhost:8080/BackEnd/item/search/" + id,
             method: "GET",
             dataType: "json",
             success: function (res, textStatus, xhr) {
                 console.log(res);
-                if(xhr.status===200){
+                if (xhr.status === 200) {
                     resolve(true);
-                }else {
+                } else {
                     resolve(false);
                 }
             },
@@ -283,29 +303,31 @@ function validItem(id) {
         });
     });
 }
+
 function searchItem(id) {
     console.log(id);
     return new Promise(function (resolve, reject) {
-    $.ajax({
-        url:"http://localhost:8080/BackEnd/item/search/"+id,
-        method: "GET",
-        dataType:"json",
-        success:function (res) {
-            console.log(res);
-            resolve(res);
-        },
-        error:function (ob, textStatus, error) {
-            resolve(error);
-        }
-    });
+        $.ajax({
+            url: "http://localhost:8080/BackEnd/item/search/" + id,
+            method: "GET",
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+                resolve(res);
+            },
+            error: function (ob, textStatus, error) {
+                resolve(error);
+            }
+        });
     });
 }
-$('#itmSearch').click(function(){
+
+$('#itmSearch').click(function () {
     let id = $("#itmCode").val();
-    searchItem(id).then(function (res){
-        $("#itmName").val(res. itmName);
-        $("#itmPrice").val(res. itmPrice);
-        $("#itmQTY").val(res. itmQTY);
+    searchItem(id).then(function (res) {
+        $("#itmName").val(res.itmName);
+        $("#itmPrice").val(res.itmPrice);
+        $("#itmQTY").val(res.itmQTY);
     });
     setItemClBtn();
 });
