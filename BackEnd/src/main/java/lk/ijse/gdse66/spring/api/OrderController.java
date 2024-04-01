@@ -1,5 +1,6 @@
 package lk.ijse.gdse66.spring.api;
 
+import jakarta.validation.Valid;
 import lk.ijse.gdse66.spring.dto.OrderDTO;
 import lk.ijse.gdse66.spring.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class OrderController {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> saveOrder(@RequestBody OrderDTO dto) {
+    public ResponseEntity<Void> saveOrder(@Valid @RequestBody OrderDTO dto) {
         orderService.saveOrder(dto);
         return ResponseEntity.ok().build();
     }
