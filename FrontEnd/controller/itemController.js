@@ -6,7 +6,8 @@ $("#itmSave").click(function () {
     if (checkAllItem()) {
         saveItem();
     } else {
-        alert("Error");
+        //alert("Error");
+        swal("Error", "Error Item Save.!", "error");
     }
 });
 
@@ -121,25 +122,43 @@ $("#itmDelete").click(function () {
 
     validItem(id).then(function (isValid) {
         if (isValid == false) {
-            alert("No such Item..please check the Code");
+            //alert("No such Item..please check the Code");
+            swal("Error", "No such Item..please check the Code", "error");
             clearItemInputFields();
         } else {
-            let consent = confirm("Do you want to delete.?");
-            if (consent) {
-                $.ajax({
-                    url: "http://localhost:8080/BackEnd/item?itmCode=" + id,
-                    method: "DELETE",
-                    success: function (res) {
-                        console.log(res);
-                        alert("Item Delete Successfully");
-                        clearItemInputFields();
-                        getAllItem();
+            /*let consent = confirm("Do you want to delete.?");
+            if (consent) {*/
+            swal("Do you want to delete this Item.?", {
+                buttons: {
+                    cancel1: {
+                        text: "Cancel",
+                        className: "custom-cancel-btn",
                     },
-                    error: function (ob, textStatus, error) {
-                        alert(textStatus + " : Error Item Not Delete")
+                    ok: {
+                        text: "OK",
+                        value: "confirm",
+                        className: "custom-ok-btn",
                     }
-                });
-            }
+                },
+            }).then((value) => {
+                if (value === "confirm") {
+                    $.ajax({
+                        url: "http://localhost:8080/BackEnd/item?itmCode=" + id,
+                        method: "DELETE",
+                        success: function (res) {
+                            console.log(res);
+                            //alert("Item Delete Successfully");
+                            swal("Deleted", "Item Delete Successfully", "success");
+                            clearItemInputFields();
+                            getAllItem();
+                        },
+                        error: function (ob, textStatus, error) {
+                            //alert(textStatus + " : Error Item Not Delete")
+                            swal("Error", textStatus + "Error Item Not Delete", "error");
+                        }
+                    });
+                }
+            });
         }
     });
     $("#itmCode").prop('disabled', true);

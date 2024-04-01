@@ -167,11 +167,13 @@ function placeOrder() {
         contentType: "application/json",
         success: function (res, textStatus, jsXH) {
             console.log(res);
-            alert("Order Added Successfully");
+            //alert("Order Added Successfully");
+            swal("Saved", "Order Added Successfully", "success");
             generateOrderId();
         },
         error: function (ob, textStatus, error) {
-            alert(textStatus + " : Error Order Not Added")
+            //alert(textStatus + " : Error Order Not Added")
+            swal("Error", textStatus + " : Error Order Not Added", "error");
         }
     });
 }
@@ -298,17 +300,21 @@ $("#btnSubmitOrder").click(function () {
                         clearAll();
                         generateOrderId();
                     } else {
-                        alert("Insert Date!");
+                        //alert("Insert Date!");
+                        swal("Error", "Insert Date!", "error");
                     }
                 } else {
-                    alert("Insuficent Credit : Check Cash!");
+                    //alert("Insuficent Credit : Check Cash!");
+                    swal("Error", "Insufficient Credit : Check Cash!", "error");
                 }
             } else {
-                alert("Order Already Registered");
+                //alert("Order Already Registered");
+                swal("Error", "Order Already Registered", "error");
             }
         });
     } else {
-        alert("Please Add Items to Place Order");
+        //alert("Please Add Items to Place Order");
+        swal("Error", "Please Add Items to Place Order", "error");
     }
 });
 

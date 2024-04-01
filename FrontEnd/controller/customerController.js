@@ -7,6 +7,7 @@ $("#cusSave").click(function () {
         saveCustomer();
     } else {
         alert("Error");
+        swal("Error", "Error Customer Save.!", "error");
     }
 });
 

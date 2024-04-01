@@ -12,6 +12,7 @@
     <list default="true" id="11e5276a-d8b5-45b2-9024-f2d6b2f9c1cd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/FrontEnd/controller/customerController.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/controller/customerController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/controller/itemController.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/controller/itemController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/controller/orderController.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/controller/orderController.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +192,7 @@
       <workItem from="1711812208817" duration="3009000" />
       <workItem from="1711815266887" duration="5818000" />
       <workItem from="1711856396334" duration="40841000" />
-      <workItem from="1711939295255" duration="20652000" />
+      <workItem from="1711939295255" duration="21643000" />
     </task>
     <servers />
   </component>
