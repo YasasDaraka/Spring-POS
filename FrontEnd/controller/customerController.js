@@ -243,11 +243,13 @@ function saveCustomer() {
                 contentType: "application/x-www-form-urlencoded",
                 success: function (res, textStatus, jsXH) {
                     console.log(res);
-                    alert("Customer Added Successfully");
+                   // alert("Customer Added Successfully");
+                    swal("Saved", "Customer Added Successfully", "success");
                     getAllCustomers();
                 },
                 error: function (ob, textStatus, error) {
-                    alert(textStatus + " : Error Customer Not Added")
+                    //alert(textStatus + " : Error Customer Not Added")
+                    swal("Error", textStatus + " : Error Customer Not Added", "error");
                 }
             });
         } else {

@@ -181,7 +181,8 @@ $("#itmUpdate").click(function () {
                 clearItemInputFields();
             }
         } else {
-            alert("No such Item..please check the Code");
+            //alert("No such Item..please check the Code");
+            swal("Error", "No such Item..please check the Code", "error");
         }
     });
 });
@@ -211,15 +212,18 @@ function saveItem() {
                 contentType:"application/x-www-form-urlencoded",
                 success:function (res,textStatus,jsXH) {
                     console.log(res);
-                    alert("Item Added Successfully");
+                    //alert("Item Added Successfully");
+                    swal("Saved", "Item Added Successfully", "success");
                     getAllItem();
                 },
                 error:function (ob, textStatus, error) {
-                    alert(textStatus+" : Error Item Not Added")
+                    //alert(textStatus+" : Error Item Not Added")
+                    swal("Error", textStatus + " : Error Item Not Added", "error");
                 }
             });
         }else {
-            alert("Item already exits.!");
+           // alert("Item already exits.!");
+            swal("Error", "Item already exits.!", "error");
             clearItemInputFields();
         }
     });
