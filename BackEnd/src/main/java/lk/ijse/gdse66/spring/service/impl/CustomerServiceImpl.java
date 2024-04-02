@@ -43,14 +43,13 @@ public class CustomerServiceImpl implements CustomerService {
                     if (proPic != null && proPic.startsWith("data:image/png;base64,")) {
                         String base64Data = dto.getProPic().substring(dto.getProPic().indexOf(",") + 1);
                         byte[] imageData = Base64.getDecoder().decode(base64Data);
-                        String uploadsDirectory = "E:\\Spring Project\\BackEnd\\src\\main\\resources";
+                        String uploadsDirectory = "E:\\Spring Project\\BackEnd\\src\\main\\resources\\cusGallery";
                         String filename = dto.getId()+".png";
                         String filePath = uploadsDirectory + File.separator + filename;
                         try {
                             FileUtils.writeByteArrayToFile(new File(filePath), imageData);
                         } catch (IOException e) {
                             e.printStackTrace();
-                            throw new RuntimeException("Image Not saved Exist");
                         }
                     }
                     customerRepo.save(tranformer.convert(dto, Tranformer.ClassType.CUS_ENTITY));

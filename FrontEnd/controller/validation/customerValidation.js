@@ -65,6 +65,8 @@ $("#customerID").on("keydown keyup", function (e) {
     searchCustomer($("#customerID").val()).then(function (res){
         $("#customerName").val(res.name);
         $("#customerAddress").val(res.address);
+        captureClear();
+        $("#capturedImage").attr('src', res.proPic);
     });
 });
 
@@ -158,9 +160,14 @@ $("#cusClear").click(function () {
     $("#cusIDError,#cusNameError,#cusAddressError,#cusSalaryError").text("");
     stopWebcamStream();
     $('#video').hide();
+    captureClear();
+});
+function captureClear() {
+    stopWebcamStream();
+    $('#video').hide();
     $("#capturedImage").show();
     $('#captureButton').css("background-color", "#007bff");
     $('#captureButton').css("border-color", "#007bff");
     $('#captureButton').text("Capture");
     $("#capturedImage").attr('src', "assets/images/defaultCusPic.gif");
-});
+}

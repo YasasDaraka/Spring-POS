@@ -133,7 +133,10 @@ function bindTrrEvents() {
         $("#cusUpdate").prop('disabled', false);
         $("#cusDelete").prop('disabled', false);
         setBtn();
-
+        searchCustomer(id).then(function (res){
+            captureClear();
+            $("#capturedImage").attr('src', res.proPic);
+        });
     });
 }
 
@@ -368,6 +371,8 @@ $('#cusSearch').click(function () {
     searchCustomer(id).then(function (res) {
         $("#customerName").val(res.name);
         $("#customerAddress").val(res.address);
+        captureClear();
+        $("#capturedImage").attr('src', res.proPic);
     });
     setClBtn();
 });
