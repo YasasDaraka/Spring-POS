@@ -21,4 +21,5 @@ public class CustomerDTO {
     @NotNull(message = "Customer address is required")
     @Pattern(regexp = "[A-Za-z0-9 ]{5,}", message = "Address is not valid")
     private String address;
+    private String proPic;
 }

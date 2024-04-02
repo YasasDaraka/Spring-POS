@@ -85,5 +85,6 @@
     <orderEntry type="library" name="Maven: jakarta.json:jakarta.json-api:2.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish:jakarta.json:module:2.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.modelmapper:modelmapper:3.2.0" level="project" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.11.0" level="project" />
   </component>
 </module>

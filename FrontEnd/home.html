@@ -109,7 +109,7 @@
   </header>
   <main id="cus-menu">
       <div class="container text-center">
-        <div class="row">
+        <div class="row"style="position: absolute;top: -5%;">
           <form id="CusForm" class="col-6" style="margin-top: 25px;width: 470px;">
             <div class="container text-center" style="background-color:#F8F9F9;padding-bottom: 30px;padding-top: 10px; margin-top: 10px;box-shadow: 1px 2px 5px 4px #EAECEE;">
               <h5 class="text-center p-2 text-light" style="background-color:#3498DB;">Customer Form
@@ -161,7 +161,14 @@
                 </div>
 
               </div>
-
+              <div class="row">
+                <div class="col-12">
+                  <video id="video" class="web" width="200" height="150" style="display:none;" autoplay></video>
+                  <canvas id="canvas" class="web" width="200" height="150" style="display:none;"></canvas>
+                  <img src="assets/images/defaultCusPic.gif" id="capturedImage" class="web" width="200"  style="display:block; padding-top: 3%">
+                  <button id="captureButton" class="btn btn-primary" style="display:block;" type="button">Capture</button>
+                </div>
+              </div>
             </div>
 
           </form>

@@ -156,4 +156,11 @@ function setBtn() {
 $("#cusClear").click(function () {
     clearCustomerInputFields();
     $("#cusIDError,#cusNameError,#cusAddressError,#cusSalaryError").text("");
+    stopWebcamStream();
+    $('#video').hide();
+    $("#capturedImage").show();
+    $('#captureButton').css("background-color", "#007bff");
+    $('#captureButton').css("border-color", "#007bff");
+    $('#captureButton').text("Capture");
+    $("#capturedImage").attr('src', "assets/images/defaultCusPic.gif");
 });

@@ -19,6 +19,8 @@ public class Customer {
     private String id;
     private String name;
     private String address;
+    @Column(columnDefinition = "LONGTEXT")
+    private String proPic;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "customer")
     private List<Order> orders = new ArrayList<>();
 }

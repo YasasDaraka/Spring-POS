@@ -4,7 +4,14 @@ getAllCustomers();
 $("#cusSave").click(function () {
 
     if (checkAll()) {
-        saveCustomer();
+        var image = $("#capturedImage");
+        var imageUrl = image.attr('src');
+        if (!imageUrl) {
+            //alert("Error");
+            swal("Error", "Take Customer Photo.!", "error");
+        } else {
+            saveCustomer();
+        }
     } else {
         alert("Error");
         swal("Error", "Error Customer Save.!", "error");
@@ -39,6 +46,25 @@ $(document).ready(function () {
         'flex': '1',
         'max-width': 'calc(100%/3*1)'
     });
+    var targetNode = document.getElementById('customer');
+    var config = {attributes: true, attributeFilter: ['style']};
+    var callback = function (mutationsList, observer) {
+        for (var mutation of mutationsList) {
+            if (mutation.attributeName === 'style') {
+                var displayStyle = window.getComputedStyle(targetNode).getPropertyValue('display');
+                if (displayStyle === 'none') {
+                    stopWebcamStream();
+                    $("#capturedImage").show();
+                    $('#captureButton').css("background-color", "#007bff");
+                    $('#captureButton').css("border-color", "#007bff");
+                    $('#captureButton').text("Capture");
+                    $("#capturedImage").attr('src', "assets/images/defaultCusPic.gif");
+                }
+            }
+        }
+    };
+    var observer = new MutationObserver(callback);
+    observer.observe(targetNode, config);
 });
 
 function generateCustomerId() {
@@ -236,15 +262,18 @@ function saveCustomer() {
             array.forEach(function (field) {
                 data[field.name] = field.value;
             });*/
-            var data = $("#CusForm").serialize();
+            var formData = $("#CusForm").serializeArray();
+            var image = $("#capturedImage");
+            var imageUrl = image.attr('src');
+            formData.push({name: 'proPic', value: imageUrl});
             $.ajax({
                 url: "http://localhost:8080/BackEnd/customer",
                 method: "POST",
-                data: data,
-                contentType: "application/x-www-form-urlencoded",
+                data: formData,
+                /*contentType: "application/x-www-form-urlencoded",*/
                 success: function (res, textStatus, jsXH) {
                     console.log(res);
-                   // alert("Customer Added Successfully");
+                    // alert("Customer Added Successfully");
                     swal("Saved", "Customer Added Successfully", "success");
                     getAllCustomers();
                 },
@@ -342,3 +371,53 @@ $('#cusSearch').click(function () {
     });
     setClBtn();
 });
+let videoStream;
+$('#captureButton').click(function () {
+    let text = $(this).text();
+    var video = $('#video')[0];
+    var canvas = $('#canvas')[0];
+    var capturedImage = $('#capturedImage');
+
+    var constraints = {
+        video: true
+    };
+
+    if (text === "Capture") {
+        $("#cusClear").prop("disabled", false);
+        $(this).text("Take Picture");
+        $(this).css("background-color", "#dc3545");
+        $(this).css("border-color", "#dc3545");
+        $(video).show();
+        capturedImage.hide();
+
+        navigator.mediaDevices.getUserMedia(constraints)
+            .then((stream) => {
+                videoStream = stream;
+                video.srcObject = stream;
+            })
+            .catch((error) => {
+                console.error('Error accessing webcam:', error);
+            });
+    } else if (text === "Take Picture") {
+        $("#cusClear").prop("disabled", false);
+        const context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const imageDataUrl = canvas.toDataURL('image/png');
+        capturedImage.attr('src', imageDataUrl);
+        capturedImage.show();
+        $(this).css("background-color", "#007bff");
+        $(this).css("border-color", "#007bff");
+        $(this).text("Capture");
+        stopWebcamStream();
+        $(video).hide();
+    }
+});
+
+function stopWebcamStream() {
+    if (videoStream) {
+        const tracks = videoStream.getTracks();
+        tracks.forEach(track => track.stop());
+        videoStream = null;
+    }
+}
