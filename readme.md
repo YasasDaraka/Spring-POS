@@ -7,7 +7,7 @@ The Super Market Management System offers a range of features to enhance the ord
 ☑️HTML
 ☑️CSS
 ☑️JavaScript 
-☑️Layeered Architecture
+☑️Layered Architecture
 
 ## Features
 
