@@ -35,6 +35,11 @@ public class OrderController {
         System.out.println(orderService.searchOrder(id).toString());
         return orderService.searchOrder(id);
     }
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/getGenId")
+    public String getCustomerGenId() {
+        return orderService.getOrderGenId();
+    }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> saveOrder(@Valid @RequestBody OrderDTO dto) {

@@ -23,30 +23,17 @@ $("#order-clear,.order-nav").click(function () {
 });
 
 function generateOrderId() {
-    loadOrderAr().then(function (orderDB) {
-        if (orderDB.length === 0) {
-            $("#orderID").val("OID-1");
-        } else {
-            console.log(orderDB[orderDB.length - 1].oid);
-            var id = orderDB[orderDB.length - 1].oid.split("-")[1];
-            var tempId = parseInt(id, 10);
-            if (!isNaN(tempId)) {
-                tempId = tempId + 1;
-                $("#orderID").val("OID-" + tempId);
-            } else {
-                console.error("Error converting order ID to a number");
-            }
-        }
+    loadOrderId().then(function (id) {
+        $("#orderID").val(id);
     }).catch(function (error) {
-        console.error("Error loading order data:", error);
+        console.error("Error loading order Id:", error);
     });
 }
-
-function loadOrderAr() {
+function loadOrderId() {
     return new Promise(function (resolve, reject) {
         var ar;
         $.ajax({
-            url: "http://localhost:8080/BackEnd/order/getAll",
+            url: "http://localhost:8080/BackEnd/order/getGenId",
             method: "GET",
             success: function (res) {
                 console.log(res);
@@ -95,11 +82,13 @@ $("#cId").change(function () {
     searchCustomer($(this).val()).then(function (customer) {
         $("#cName").val(customer.name);
         $("#cAddress").val(customer.address);
-
+        $("#cusImage").attr('src', customer.proPic);
+        $('#cusImage').css('display', 'block');
         setAndTriggerValue($("#cName"), customer.name);
         setAndTriggerValue($("#cAddress"), customer.address);
         dateCheck();
     });
+    $("#cusImage").css("display","none")
 });
 
 function setItemIds() {
@@ -356,6 +345,8 @@ $("#orderID").on("keydown", async function (e) {
                 $("#cName").val(cusName);
                 $("#cAddress").val(address);
                 $("#orderDate").val(date);
+                $("#cusImage").attr('src', customer.proPic);
+                $('#cusImage').css('display', 'block');
             }
 
             let code;

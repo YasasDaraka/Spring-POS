@@ -33,6 +33,12 @@ public class ItemController {
         return itemService.searchItem(itmCode);
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/getGenId")
+    public String getCustomerGenId() {
+        return itemService.getItemGenId();
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> saveItem(@Valid @ModelAttribute ItemDTO dto){

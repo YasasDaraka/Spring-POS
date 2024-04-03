@@ -5,6 +5,7 @@ import lk.ijse.gdse66.spring.repository.CustomerRepo;
 import lk.ijse.gdse66.spring.service.CustomerService;
 import lk.ijse.gdse66.spring.service.exception.DuplicateRecordException;
 import lk.ijse.gdse66.spring.service.exception.NotFoundException;
+import lk.ijse.gdse66.spring.service.util.IdGenerator;
 import lk.ijse.gdse66.spring.service.util.Tranformer;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,8 @@ public class CustomerServiceImpl implements CustomerService {
     CustomerRepo customerRepo;
     @Autowired
     Tranformer tranformer;
-
+    @Autowired
+    IdGenerator generator;
     @Override
     public List<CustomerDTO> getAllCustomer() {
         return tranformer.convert(customerRepo.findAll(), Tranformer.ClassType.CUS_DTO_LIST);
@@ -84,5 +86,10 @@ public class CustomerServiceImpl implements CustomerService {
                     throw new NotFoundException("Customer Not Exist");
                 }
         );
+    }
+
+    @Override
+    public String getCustomerGenId() {
+        return generator.getGenerateID(customerRepo.getCusId(), IdGenerator.GenerateTypes.CUSTOMER);
     }
 }

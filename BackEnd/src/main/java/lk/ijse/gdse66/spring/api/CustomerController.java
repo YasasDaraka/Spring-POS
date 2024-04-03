@@ -32,6 +32,12 @@ public class CustomerController {
         return cusService.searchCustomer(id);
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/getGenId")
+    public String getCustomerGenId() {
+        return cusService.getCustomerGenId();
+    }
+
     /*@PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> saveCustomer(@Valid @ModelAttribute CustomerDTO dto){

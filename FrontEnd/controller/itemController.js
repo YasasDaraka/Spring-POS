@@ -41,24 +41,28 @@ $(document).ready(function () {
         'max-width': 'calc(100%/4*1)'
     });
 });
-
 function generateItemId() {
-    loadItemAr().then(function (itemDB) {
-        if (itemDB.length === 0) {
-            $("#itmCode").val("I00-1");
-        } else {
-            console.log(itemDB[itemDB.length - 1].itmCode);
-            var id = itemDB[itemDB.length - 1].itmCode.split("-")[1];
-            var tempId = parseInt(id, 10);
-            if (!isNaN(tempId)) {
-                tempId = tempId + 1;
-                $("#itmCode").val("I00-" + tempId);
-            } else {
-                console.error("Error converting Item Code to a number");
-            }
-        }
+    loadItemId().then(function (id) {
+        $("#itmCode").val(id);
     }).catch(function (error) {
-        console.error("Error loading Item data:", error);
+        console.error("Error loading item code:", error);
+    });
+}
+function loadItemId() {
+    return new Promise(function (resolve, reject) {
+        var ar;
+        $.ajax({
+            url: "http://localhost:8080/BackEnd/item/getGenId",
+            method: "GET",
+            success: function (res) {
+                console.log(res);
+                ar = res;
+                resolve(ar);
+            },
+            error: function (error) {
+                reject(error);
+            }
+        });
     });
 }
 

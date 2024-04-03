@@ -68,22 +68,27 @@ $(document).ready(function () {
 });
 
 function generateCustomerId() {
-    loadCusAr().then(function (customerDB) {
-        if (customerDB.length === 0) {
-            $("#customerID").val("C00-1");
-        } else {
-            console.log(customerDB[customerDB.length - 1].id);
-            var id = customerDB[customerDB.length - 1].id.split("-")[1];
-            var tempId = parseInt(id, 10);
-            if (!isNaN(tempId)) {
-                tempId = tempId + 1;
-                $("#customerID").val("C00-" + tempId);
-            } else {
-                console.error("Error converting customer ID to a number");
-            }
-        }
+    loadCusId().then(function (id) {
+            $("#customerID").val(id);
     }).catch(function (error) {
-        console.error("Error loading customer data:", error);
+        console.error("Error loading customer Id:", error);
+    });
+}
+function loadCusId() {
+    return new Promise(function (resolve, reject) {
+        var ar;
+        $.ajax({
+            url: "http://localhost:8080/BackEnd/customer/getGenId",
+            method: "GET",
+            success: function (res) {
+                console.log(res);
+                ar = res;
+                resolve(ar);
+            },
+            error: function (error) {
+                reject(error);
+            }
+        });
     });
 }
 

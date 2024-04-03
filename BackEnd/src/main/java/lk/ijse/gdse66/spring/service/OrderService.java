@@ -7,4 +7,5 @@ public interface OrderService {
     List<OrderDTO> getAllOrder();
     OrderDTO searchOrder(String id);
     void saveOrder(OrderDTO dto);
+    String getOrderGenId();
 }

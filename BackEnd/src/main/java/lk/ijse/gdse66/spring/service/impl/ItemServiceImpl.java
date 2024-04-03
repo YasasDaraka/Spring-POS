@@ -5,6 +5,7 @@ import lk.ijse.gdse66.spring.repository.ItemRepo;
 import lk.ijse.gdse66.spring.service.ItemService;
 import lk.ijse.gdse66.spring.service.exception.DuplicateRecordException;
 import lk.ijse.gdse66.spring.service.exception.NotFoundException;
+import lk.ijse.gdse66.spring.service.util.IdGenerator;
 import lk.ijse.gdse66.spring.service.util.Tranformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public class ItemServiceImpl implements ItemService {
     ItemRepo itemRepo;
     @Autowired
     Tranformer tranformer;
+    @Autowired
+    IdGenerator generator;
     @Override
     public List<ItemDTO> getAllItem() {
         return tranformer.convert(itemRepo.findAll(), Tranformer.ClassType.ITEM_DTO_LIST);
@@ -50,5 +53,9 @@ public class ItemServiceImpl implements ItemService {
                 item -> itemRepo.deleteById(id),
                 ()-> {throw new NotFoundException("Item Not Exist");}
         );
+    }
+    @Override
+    public String getItemGenId() {
+        return generator.getGenerateID(itemRepo.getItemId(), IdGenerator.GenerateTypes.ITEM);
     }
 }

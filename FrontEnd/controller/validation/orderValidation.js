@@ -156,6 +156,8 @@ function clearAll() {
     $("#order-add-item").prop("disabled", true);
     $("#btnSubmitOrder").prop("disabled", true);
     $("#order-table").empty();
+    $("#cusImage").attr('src', "");
+    $('#cusImage').css('display', 'none');
 }
 $("#cName,#cAddress,#itemName,#price,#qtyOnHand,#orderQty,#orderDate,#txtCash,#txtDiscount,#txtBalance,#QtyError").on("keydown keyup input", function (e){
     var empty = true;

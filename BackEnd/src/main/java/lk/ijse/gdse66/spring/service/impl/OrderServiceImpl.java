@@ -8,6 +8,7 @@ import lk.ijse.gdse66.spring.repository.OrderRepo;
 import lk.ijse.gdse66.spring.service.OrderService;
 import lk.ijse.gdse66.spring.service.exception.DuplicateRecordException;
 import lk.ijse.gdse66.spring.service.exception.NotFoundException;
+import lk.ijse.gdse66.spring.service.util.IdGenerator;
 import lk.ijse.gdse66.spring.service.util.Tranformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,8 @@ public class OrderServiceImpl implements OrderService {
     ItemRepo itemRepo;
     @Autowired
     Tranformer tranformer;
+    @Autowired
+    IdGenerator generator;
 
     @Override
     public List<OrderDTO> getAllOrder() {
@@ -64,5 +67,9 @@ public class OrderServiceImpl implements OrderService {
                     }
                     System.out.println("order added");
                 });
+    }
+    @Override
+    public String getOrderGenId() {
+        return generator.getGenerateID(orderRepo.getOrderId(), IdGenerator.GenerateTypes.ORDER);
     }
 }
