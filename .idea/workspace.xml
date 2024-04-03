@@ -10,13 +10,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="11e5276a-d8b5-45b2-9024-f2d6b2f9c1cd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BackEnd_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/BackEnd_war_exploded.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/BackEnd.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/BackEnd.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/api/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/api/CustomerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/service/impl/CustomerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/lk/ijse/gdse66/spring/service/impl/CustomerServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0.war" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0/WEB-INF/classes/lk/ijse/gdse66/spring/api/CustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0/WEB-INF/classes/lk/ijse/gdse66/spring/api/CustomerController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0/WEB-INF/classes/lk/ijse/gdse66/spring/service/impl/CustomerServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/BackEnd-1.0.0/WEB-INF/classes/lk/ijse/gdse66/spring/service/impl/CustomerServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/lk/ijse/gdse66/spring/api/CustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/lk/ijse/gdse66/spring/api/CustomerController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/lk/ijse/gdse66/spring/service/impl/CustomerServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/lk/ijse/gdse66/spring/service/impl/CustomerServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/controller/customerController.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/controller/customerController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/controller/validation/customerValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/controller/validation/customerValidation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/home.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,17 +89,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Tomcat 10.1.17" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.17" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER" value="false" />
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -201,7 +196,8 @@
       <workItem from="1711990892522" duration="2040000" />
       <workItem from="1712039427151" duration="18849000" />
       <workItem from="1712064602937" duration="5222000" />
-      <workItem from="1712072716884" duration="2588000" />
+      <workItem from="1712072716884" duration="2713000" />
+      <workItem from="1712114186553" duration="6034000" />
     </task>
     <servers />
   </component>

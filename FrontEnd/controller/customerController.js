@@ -173,6 +173,7 @@ $("#cusDelete").click(function () {
                             // alert("Customer Delete Successfully");
                             swal("Deleted", "Customer Delete Successfully", "success");
                             clearCustomerInputFields();
+                            captureClear();
                             getAllCustomers();
                         },
                         error: function (ob, textStatus, error) {
@@ -216,6 +217,10 @@ $("#cusUpdate").click(function () {
                     array.forEach(function (field) {
                         data[field.name] = field.value;
                     });
+                    let haveImg = $("#capturedImage").attr('src');
+                    if (haveImg.startsWith("data:image/png;base64,")){
+                        data["proPic"] = haveImg;
+                    }
                     console.log(data)
                     $.ajax({
                         url: "http://localhost:8080/BackEnd/customer",
@@ -226,6 +231,7 @@ $("#cusUpdate").click(function () {
                             console.log(res);
                             //alert("Customer Update Successfully")
                             swal("Updated", "Customer Update Successfully", "success");
+                            captureClear();
                             getAllCustomers();
                         },
                         error: function (ob, textStatus, error) {

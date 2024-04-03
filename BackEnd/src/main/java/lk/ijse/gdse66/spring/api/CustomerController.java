@@ -62,6 +62,7 @@ public class CustomerController {
 
     @PutMapping
     public ResponseEntity<Void> updateCustomer(@Valid @RequestBody CustomerDTO dto) {
+        System.out.println("Received customer data: " + dto.toString());
         cusService.updateCustomer(dto);
         return ResponseEntity.noContent().build();
     }
